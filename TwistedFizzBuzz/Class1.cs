@@ -1,5 +1,5 @@
 ﻿namespace TwistedFizzBuzz;
-public class Class1
+public static class Util
 {
     static String buzz = "buzz";
     static int buzzDivisor = 5;
@@ -21,9 +21,9 @@ public class Class1
                 fizzBuzzInt += buzz;
 			if (fizzBuzzInt.Length == 0)
                 fizzBuzzInt += i;
-			output += fizzBuzzInt + " ";
+			output += fizzBuzzInt + ", ";
 		}
-		return output;
+		return output.Substring(0, output.Length - 2);
 	}
 
 	/* TODO: Accept user input of a non-sequential set of numbers and returns 
@@ -43,8 +43,8 @@ public class Class1
 				fizzBuzzInt += userInput[i];
 			output += fizzBuzzInt + " ";
 		}
-		return output;
-	}
+        return output.Substring(0, output.Length - 2);
+    }
 
 	public static void ResetFizzBuzz()
 	{
