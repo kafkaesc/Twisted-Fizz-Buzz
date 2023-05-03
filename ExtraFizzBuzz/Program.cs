@@ -15,7 +15,7 @@ class Program
     static void Main(String[] args)
     {
         TwistedFizzBuzz.Util.SetFizzBuzz("Fizz", 5, "Buzz", 9, "Bar", 27);
-        Console.WriteLine(TwistedFizzBuzz.Util.FizzBuzz(1, 200));
+        Console.WriteLine(TwistedFizzBuzz.Util.FizzBuzz(-20, 127));
         TwistedFizzBuzz.Util.ResetFizzBuzz();
     }
 }
