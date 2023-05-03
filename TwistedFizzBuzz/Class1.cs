@@ -30,13 +30,13 @@ public static class Util
 		String output = "";
 		if (start < end)
 			for (var i = start; i <= end; i++)
-				output += FizzBuzz(i) + ", ";
+				output += FizzBuzz(i) + "\n";
 		else if (start > end)
 			for (var i = start; i >= end; i--)
-				output += FizzBuzz(i) + ", ";
+				output += FizzBuzz(i) + "\n";
 		else
-			output += FizzBuzz(start) + ", ";
-		return output.Substring(0, output.Length - 2);
+			output += FizzBuzz(start) + "\n";
+		return output.Substring(0, output.Length - 1);
 	}
 
 	/* Accept user input of a non-sequential set of numbers and returns 
@@ -46,7 +46,7 @@ public static class Util
 		String output = "";
 		for (var i = 0; i < userInput.Length; i++)
 			output += FizzBuzz(userInput[i]) + ", ";
-		return output.Substring(0, output.Length - 2);
+		return output.Substring(0, output.Length - 1);
 	}
 
 	/* Reset the class variables to the default state. */
