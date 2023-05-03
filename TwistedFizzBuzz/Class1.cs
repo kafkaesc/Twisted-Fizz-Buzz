@@ -4,33 +4,17 @@ public static class Util
 	static String fizz = "Fizz";
 	static int fizzDivisor = 3;
 	static String buzz = "Buzz";
-	static int buzzDivisor = 5;
+	static int? buzzDivisor = 5;
 	static String tern = "Tern";
 	static int? ternDivisor = null;
-	
-	/* Accept user input for a range of numbers and returns their FizzBuzz 
-	 * output, e.g., 1-50; 1-2,000,000,000; or (-2)-(-37).
-	 */
-	public static String FizzBuzz(int start, int end)
-	{
-		String output = "";
-		if (start < end)
-			for (var i = start; i <= end; i++)
-				output += FizzBuzzString(i) + ", ";
-		else if (start > end)
-			for (var i = start; i >= end; i--)
-				output += FizzBuzzString(i) + ", ";
-		else
-			output += FizzBuzzString(start) + ", ";
-		return output.Substring(0, output.Length - 2);
-	}
 
-	private static String FizzBuzzString(int n)
+	/* Returns the corresponding FizzBuzz string/int for the given int n */
+	public static String FizzBuzz(int n)
 	{
 		String fizzBuzzString = "";
 		if (n % fizzDivisor == 0)
 			fizzBuzzString += fizz;
-		if (n % buzzDivisor == 0)
+		if (buzzDivisor != null && n % buzzDivisor.Value == 0)
 			fizzBuzzString += buzz;
 		if (ternDivisor != null && n % ternDivisor.Value == 0)
 			fizzBuzzString += tern;
@@ -39,17 +23,33 @@ public static class Util
 		return fizzBuzzString;
 	}
 
-	/* Accept user input of a non-sequential set of numbers and returns 
-	 * their FizzBuzz output, e.g., -5, 6, 300, 12, 15.
-	 */
-	public static String FizzBuzzDiscrete(int[] userInput)
+	/* Accept user input for a range of numbers and returns their FizzBuzz 
+	 * output, e.g., 1-50; 1-2,000,000,000; or (-2)-(-37). */
+	public static String FizzBuzz(int start, int end)
 	{
 		String output = "";
-		for (var i = 0; i < userInput.Length; i++)
-			output += FizzBuzzString(userInput[i]) + ", ";
+		if (start < end)
+			for (var i = start; i <= end; i++)
+				output += FizzBuzz(i) + ", ";
+		else if (start > end)
+			for (var i = start; i >= end; i--)
+				output += FizzBuzz(i) + ", ";
+		else
+			output += FizzBuzz(start) + ", ";
 		return output.Substring(0, output.Length - 2);
 	}
 
+	/* Accept user input of a non-sequential set of numbers and returns 
+	 * their FizzBuzz output, e.g., -5, 6, 300, 12, 15. */
+	public static String FizzBuzz(int[] userInput)
+	{
+		String output = "";
+		for (var i = 0; i < userInput.Length; i++)
+			output += FizzBuzz(userInput[i]) + ", ";
+		return output.Substring(0, output.Length - 2);
+	}
+
+	/* Reset the class variables to the default state. */
 	public static void ResetFizzBuzz()
 	{
 		buzz = "buzz";
@@ -64,13 +64,12 @@ public static class Util
 	 * and alternative divisors instead of 3 and 5. For example, 7, 17, and 3 
 	 * would use "Poem", "Writer", and "College". 119 would output "PoemWriter",
 	 * 51 would output "WriterCollege", 21 would output "PoemCollege, and 357 
-	 * would output "PoemWriterCollege".
-	 */
+	 * would output "PoemWriterCollege". */
 	public static void SetFizzBuzz(
 		String fizzName,
 		int? fizzDiv,
-		String buzzName,
-		int? buzzDiv,
+		String? buzzName = null,
+		int? buzzDiv = null,
 		String? ternName = null,
 		int? ternDiv = null
 	) {
@@ -88,9 +87,10 @@ public static class Util
 			ternDivisor = ternDiv.Value;
 	}
 
-
-	/* TODO: Accept user input for API generated tokens provided by 
-	 * https://rich-red-cocoon-veil.cyclic.app/
-	 */
+	/* Accept user input for API generated tokens provided by 
+	 * https://rich-red-cocoon-veil.cyclic.app/ */
+	public static void SetFizzBuzz(FizzBuzzApiResponse fbar)
+	{
+		SetFizzBuzz(fbar.word, fbar.multiple);
+	}
 }
-
