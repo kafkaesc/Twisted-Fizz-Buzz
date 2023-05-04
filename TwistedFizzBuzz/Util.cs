@@ -1,11 +1,16 @@
 ﻿namespace TwistedFizzBuzz;
+
 public static class Util
 {
-	static String fizz = "Fizz";
+	private const String defaultFizz = "Fizz";
+	private const String defaultBuzz = "Buzz";
+	private const String defaultTern = "Tern";
+
+	static String fizz = defaultFizz;
 	static int fizzDivisor = 3;
-	static String buzz = "Buzz";
+	static String buzz = defaultBuzz;
 	static int? buzzDivisor = 5;
-	static String tern = "Tern";
+	static String tern = defaultTern;
 	static int? ternDivisor = null;
 
 	/* Returns the corresponding FizzBuzz string/int for the given int n */
@@ -44,19 +49,19 @@ public static class Util
 	public static String FizzBuzz(int[] userInput)
 	{
 		String output = "";
-		for (var i = 0; i < userInput.Length; i++)
-			output += FizzBuzz(userInput[i]) + ", ";
+		for (var j = 0; j < userInput.Length; j++)
+			output += FizzBuzz(userInput[j]) + "\n";
 		return output.Substring(0, output.Length - 1);
 	}
 
 	/* Reset the class variables to the default state. */
 	public static void ResetFizzBuzz()
 	{
-		buzz = "buzz";
-		buzzDivisor = 5;
-		fizz = "fizz";
+		fizz = defaultFizz;
 		fizzDivisor = 3;
-		tern = "tern";
+		buzz = defaultBuzz;
+		buzzDivisor = 5;
+		tern = defaultTern;
 		ternDivisor = null;
 	}
 
@@ -81,6 +86,8 @@ public static class Util
 			buzz = buzzName;
 		if (buzzDiv != null)
 			buzzDivisor = buzzDiv.Value;
+		else if (buzzDiv == null)
+			buzzDivisor = null;
 		if (ternName != null)
 			tern = ternName;
 		if (ternDiv != null)
@@ -91,6 +98,6 @@ public static class Util
 	 * https://rich-red-cocoon-veil.cyclic.app/ */
 	public static void SetFizzBuzz(FizzBuzzApiResponse fbar)
 	{
-		SetFizzBuzz(fbar.word, fbar.multiple);
+		SetFizzBuzz(fbar.word, fbar.multiple, null, null);
 	}
 }
